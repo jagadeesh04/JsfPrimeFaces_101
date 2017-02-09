@@ -1,22 +1,118 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<p:outputLabel value="Jag - JSF2/Primefaces Tutorial"></p:outputLabel>
-<p:dataTable value="#{viewEmployeesManagedBean.employees}" var="employee">
-	<p:column>
-		<f:facet name="header">
-			<h:outputText value="Employee ID"></h:outputText>
-		</f:facet>
-		<h:outputText value="#{employee.employeeId}"></h:outputText>
-	</p:column>
-	<p:column>
-		<f:facet name="header">
-			<h:outputText value="Employee Name"></h:outputText>
-		</f:facet>
-		<h:outputText value="#{employee.employeeName}"></h:outputText>
-	</p:column>
-</p:dataTable>
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:dataTable value="#{mbean.personList}" var="person">
+            <p:column headerText="Name">
+                <p:commandLink value="#{person.name}" 
+                    update=":form">
+                    <f:setPropertyActionListener target="#{mbean.selectedPerson}"
+                        value="#{person}" />
+                </p:commandLink>
+            </p:column>
+            <p:column headerText="Country">
+                #{person.country}
+            </p:column>
+        </p:dataTable>
+        
+        <!-- <ui:include src="/WEB-INF/test.xhtml" /> -->
+        
+        <ui:repeat var="d" value="#{mbean.personList}">
+        
+    	    <p:dialog modal="false" width="500" height="500" widgetVar="#{d.getName()}">
+        	    <h:outputLabel value="#{d.getName()}"></h:outputLabel>
+            
+	        </p:dialog>
+        </ui:repeat>
+        
+        
+        <!-- <p:dialog modal="false" width="500" height="500" widgetVar="#{mbean.selectedPerson.name}">
+        	    <h:outputLabel value="Aaa"></h:outputLabel>
+            
+	        </p:dialog>
+	        
+	        <p:dialog modal="false" width="500" height="500" widgetVar="#{mbean.selectedPerson.name}">
+        	    <h:outputLabel value="Bbb"></h:outputLabel>
+            
+	        </p:dialog>
+	        
+	        <p:dialog modal="false" width="500" height="500" widgetVar="#{mbean.selectedPerson.name}">
+        	    <h:outputLabel value="Ccc"></h:outputLabel>
+            
+	        </p:dialog> -->
+        
+<script type="text/javascript">
+
+	function check(name){
+		alert('hi');
+		alert(name);
+		PF('Aaa').show();
+	}
+
+</script>
+    </h:form>
+
+
+    
+    <!-- <h:form id="form">
+
+        <div id="dialogs"></div>
+
+        <p:commandButton value="New Terminal" 
+                         update="dilaogContainer"
+                         oncomplete="handleNewDialog()"/>
+
+        <h:panelGroup id="dilaogContainer">
+            <p:dialog id="#{bean.nextDialogId()}" height="300" width="300" >                     
+                <iframe src="http://www.w3schools.com/" width="100%" height="100%"></iframe>
+            </p:dialog>
+            
+			
+
+        </h:panelGroup>
+        
+        <script type="text/javascript">
+			var dialogs = [];
+
+			function handleNewDialog() {
+			   newDialog = $(PrimeFaces.escapeClientId('form:dilaogContainer')).find(">:first-child");
+			   newDialog.appendTo("#dialogs");
+			   newDialogVar = getWidgetVar(newDialog.attr('id'));        
+			   alert('4');
+			   newDialogVar.show();
+			   alert('5');
+			   moveDialog(newDialogVar);
+			   alert('6');
+			   dialogs.push(newDialogVar); 
+			}
+
+			function moveDialog(dialog) {
+				alert('7');
+				if(dialogs.length > 0) {
+			       lastDialog = dialogs[dialogs.length -1];
+			       dialog.jq.css({'left' : lastDialog.jq.position().left+ 400 +'px'})
+			   } else {
+			       dialog.jq.css({'left' : '0px'})
+			   }
+			}
+
+			function getWidgetVar(id) {
+			   widgetName = 'widget_' + id.replace(/\:/g, '_');
+			   return window[widgetName];
+			}
+			</script>
+
+    </h:form> -->
+    
+    
+    
+    
+</h:body>
 </html>
