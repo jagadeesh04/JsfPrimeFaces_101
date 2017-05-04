@@ -23,30 +23,17 @@
         </p:dataTable>
         
         <!-- <ui:include src="/WEB-INF/test.xhtml" /> -->
-        
         <ui:repeat var="d" value="#{mbean.personList}">
         
-    	    <p:dialog modal="false" width="500" height="500" widgetVar="#{d.getName()}">
+    	    <p:dialog id="_#{d.getId()}"  modal="false" width="500" height="500" widgetVar="Jag:#{d.getId()}">
+    	    <f:facet name="header">
+    			   <h:outputText id="someDialogHeader" value="#{d.getName()}"/>
+   			</f:facet>
+    	    <p:ajax event="close" listener="#{mbean.handleClose}" />
         	    <h:outputLabel value="#{d.getName()}"></h:outputLabel>
-            
+        	    
 	        </p:dialog>
         </ui:repeat>
-        
-        
-        <!-- <p:dialog modal="false" width="500" height="500" widgetVar="#{mbean.selectedPerson.name}">
-        	    <h:outputLabel value="Aaa"></h:outputLabel>
-            
-	        </p:dialog>
-	        
-	        <p:dialog modal="false" width="500" height="500" widgetVar="#{mbean.selectedPerson.name}">
-        	    <h:outputLabel value="Bbb"></h:outputLabel>
-            
-	        </p:dialog>
-	        
-	        <p:dialog modal="false" width="500" height="500" widgetVar="#{mbean.selectedPerson.name}">
-        	    <h:outputLabel value="Ccc"></h:outputLabel>
-            
-	        </p:dialog> -->
         
 <script type="text/javascript">
 
@@ -58,60 +45,6 @@
 
 </script>
     </h:form>
-
-
-    
-    <!-- <h:form id="form">
-
-        <div id="dialogs"></div>
-
-        <p:commandButton value="New Terminal" 
-                         update="dilaogContainer"
-                         oncomplete="handleNewDialog()"/>
-
-        <h:panelGroup id="dilaogContainer">
-            <p:dialog id="#{bean.nextDialogId()}" height="300" width="300" >                     
-                <iframe src="http://www.w3schools.com/" width="100%" height="100%"></iframe>
-            </p:dialog>
-            
-			
-
-        </h:panelGroup>
-        
-        <script type="text/javascript">
-			var dialogs = [];
-
-			function handleNewDialog() {
-			   newDialog = $(PrimeFaces.escapeClientId('form:dilaogContainer')).find(">:first-child");
-			   newDialog.appendTo("#dialogs");
-			   newDialogVar = getWidgetVar(newDialog.attr('id'));        
-			   alert('4');
-			   newDialogVar.show();
-			   alert('5');
-			   moveDialog(newDialogVar);
-			   alert('6');
-			   dialogs.push(newDialogVar); 
-			}
-
-			function moveDialog(dialog) {
-				alert('7');
-				if(dialogs.length > 0) {
-			       lastDialog = dialogs[dialogs.length -1];
-			       dialog.jq.css({'left' : lastDialog.jq.position().left+ 400 +'px'})
-			   } else {
-			       dialog.jq.css({'left' : '0px'})
-			   }
-			}
-
-			function getWidgetVar(id) {
-			   widgetName = 'widget_' + id.replace(/\:/g, '_');
-			   return window[widgetName];
-			}
-			</script>
-
-    </h:form> -->
-    
-    
     
     
 </h:body>

@@ -19,5 +19,7 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/jaggangishetti/Downloads/primefaces-5.0.jar"/>
+	<classpathentry kind="lib" path="/Users/jaggangishetti/Downloads/common-lang3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
